@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Partials, db, EmbedBuilder } = require("discord.js");
 const INTENTS = Object.values(GatewayIntentBits);
 const PARTIALS = Object.values(Partials);
+const token = process.env.token; // Tokeni buraya girin
 const client = new Client({
     intents: INTENTS,
     allowedMentions: {
@@ -10,7 +11,7 @@ const client = new Client({
     retryLimit: 3
 });
 
-client.login(process.env.token).then(
+client.login(token).then(
     function () {
         console.log("[Token-Log] Token doğru bir şekilde çalışıyor.");
     },
@@ -25,13 +26,13 @@ client.login(process.env.token).then(
 client.on("ready", () => {});
 
 client.on("presenceUpdate", async (eski, yeni) => {
-      const member = client.guilds.cache.get("1212715851808243722").members.cache.get(yeni.user.id);
-      const channel = client.channels.cache.get("1233413832995639357");
-      const text = "/gamertags";
-      const rol = "1233414319404744714";
-      const yenia = yeni?.activities[0]?.state;
-      const eskia = eski?.activities[0]?.state;
-      if (member) {
+    const member = client.guilds.cache.get("1212715851808243722").members.cache.get(yeni.user.id);
+    const channel = client.channels.cache.get("1233413832995639357");
+    const text = "/gamertags";
+    const rol = "1233414319404744714";
+    const yenia = yeni?.activities[0]?.state;
+    const eskia = eski?.activities[0]?.state;
+    if (member) {
         const targetRole = member.guild.roles.cache.get(rol);
 
         if (eskia?.includes(text) && !yenia?.includes(text)) {
